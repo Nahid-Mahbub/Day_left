@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>New Year Countdown</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background: #000;
+        color: #fff;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        text-align: center;
+    }
+
+    #days {
+        font-size: 8em;
+        font-weight: bold;
+        margin-bottom: 10px;
+        text-shadow: 0 0 10px #fff;
+    }
+
+    #days-label {
+        font-size: 2em;
+        margin-bottom: 40px;
+        opacity: 0.8;
+    }
+
+    .time-container {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+    }
+
+    .time-box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .time-box .number {
+        font-size: 4em;
+        font-weight: bold;
+        text-shadow: 0 0 5px #fff;
+    }
+
+    .time-box .label {
+        font-size: 1.5em;
+        margin-top: 5px;
+        opacity: 0.8;
+    }
+
+    .quote {
+        font-size: 1.8em;
+        color: #ff5252;
+        font-weight: 600;
+        max-width: 700px;
+        line-height: 1.4;
+        margin-top: 50px;
+        padding: 0 20px;
+    }
+</style>
+</head>
+<body>
+    <div id="days">0</div>
+    <div id="days-label">days</div>
+
+    <div class="time-container">
+        <div class="time-box">
+            <div class="number" id="hours">0</div>
+            <div class="label">hours</div>
+        </div>
+        <div class="time-box">
+            <div class="number" id="minutes">0</div>
+            <div class="label">minutes</div>
+        </div>
+        <div class="time-box">
+            <div class="number" id="seconds">0</div>
+            <div class="label">seconds</div>
+        </div>
+    </div>
+
+    <div class="quote">{{ daily_quote }}</div>
+
+<script>
+function updateCountdown() {
+    const now = new Date();
+    const nextYear = new Date(now.getFullYear() + 1, 0, 1);
+    const diff = nextYear - now;
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
+
+    document.getElementById("days").textContent = days;
+    document.getElementById("hours").textContent = hours;
+    document.getElementById("minutes").textContent = minutes;
+    document.getElementById("seconds").textContent = seconds;
+}
+
+updateCountdown();
+setInterval(updateCountdown, 1000);
+</script>
+</body>
+</html>
